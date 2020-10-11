@@ -94,6 +94,7 @@ class PandasDtype(Enum):
     """
 
     Bool = "bool"  #: ``"bool"`` numpy dtype
+    Boolean = "boolean" # pandas Boolean
     DateTime = "datetime64[ns]"  #: ``"datetime64[ns]"`` numpy dtype
     Timedelta = "timedelta64[ns]"  #: ``"timedelta64[ns]"`` numpy dtype
     Category = "category"  #: pandas ``"categorical"`` datatype
@@ -146,6 +147,7 @@ class PandasDtype(Enum):
         """
         pandas_dtype = {
             "bool": cls.Bool,
+            "boolean": cls.Boolean,
             "datetime64[ns]": cls.DateTime,
             "timedelta64[ns]": cls.Timedelta,
             "category": cls.Category,

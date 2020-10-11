@@ -9,7 +9,7 @@ import numpy as np
 import pandera as pa
 from pandera import (
     Column, DataFrameSchema, SeriesSchema, Check, DateTime, Float, Int,
-    String, Bool, Category, Object, Timedelta, PandasDtype
+    String, Bool, Category, Object, Timedelta, PandasDtype, Boolean
 )
 from pandera.dtypes import (
     _DEFAULT_PANDAS_INT_TYPE, _DEFAULT_PANDAS_FLOAT_TYPE,
@@ -21,6 +21,7 @@ from pandera.errors import SchemaError
 PANDAS_VERSION = version.parse(pd.__version__)
 
 TESTABLE_DTYPES = [
+    (Boolean, "boolean"),
     (Bool, "bool"),
     (DateTime, "datetime64[ns]"),
     (Category, "category"),

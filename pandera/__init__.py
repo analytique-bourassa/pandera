@@ -12,6 +12,7 @@ from .version import __version__
 
 
 Bool = PandasDtype.Bool
+Boolean = PandasDtype.Boolean
 DateTime = PandasDtype.DateTime
 Category = PandasDtype.Category
 Float = PandasDtype.Float

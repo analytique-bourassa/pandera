@@ -942,7 +942,7 @@ class SeriesSchemaBase():
                     )
                 )
 
-        if self.dtype is not None and str(series_dtype) != self.dtype:
+        if self.dtype is not None and str(series_dtype) != self.dtype and series.convert_dtypes().dtype != self.dtype:
             msg = (
                 "expected series '%s' to have type %s, got %s" %
                 (series.name, self.dtype, str(series_dtype))

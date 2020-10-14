@@ -9,7 +9,7 @@ import pytest
 from pandera import errors
 from pandera import (
     Column, DataFrameSchema, Index, MultiIndex, Check, DateTime, Float, Int,
-    Object, String)
+    Object, String, Boolean)
 from tests.test_dtypes import TESTABLE_DTYPES
 
 
@@ -457,3 +457,41 @@ def test_column_type_can_be_set():
     for invalid_dtype in (1, 2.2, ["foo", 1, 1.1], {"b": 1}):
         with pytest.raises(TypeError):
             column_a.pandas_dtype = invalid_dtype
+
+
+def test_given_a_boolean_type_in_schema_and_boolean_values_in_dataframe_should_not_raise_error_in_validate():
+
+    # Arrange
+    column_being_tested = "column"
+    data = pd.DataFrame({
+        column_being_tested: [True, False]
+    })
+
+    schema = DataFrameSchema(
+        columns={column_being_tested: Column(Boolean, nullable=True)},
+    )
+
+    # Action
+    result_dataframe = schema.validate(data)
+
+    # Assert
+    assert isinstance(result_dataframe, pd.DataFrame)
+
+
+def test_given_a_boolean_type_in_schema_and_pandas_NA_value_in_dataframe_should_not_raise_error_in_validate():
+
+    # Arrange
+    column_being_tested = "column"
+    data = pd.DataFrame({
+        column_being_tested: [True, pd.NA, pd.NA]
+    })
+
+    schema = DataFrameSchema(
+        columns={column_being_tested: Column(Boolean, nullable=True)},
+    )
+
+    # Action
+    result_dataframe = schema.validate(data)
+
+    # Assert
+    assert isinstance(result_dataframe, pd.DataFrame)
